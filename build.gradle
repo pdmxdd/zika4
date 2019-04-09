@@ -1,0 +1,34 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath(group: 'org.postgresql', name: 'postgresql', version: '42.1.4')
+		classpath(group: 'org.hibernate', name: 'hibernate-spatial', version: '5.1.0.Final')
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'org.launchcode'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compile(group: 'org.postgresql', name: 'postgresql', version: '42.1.4')
+	compile(group: 'org.hibernate', name: 'hibernate-spatial', version: '5.1.0.Final')
+}
