@@ -40,6 +40,19 @@ $(document).ready(() => {
   });
   map.addLayer(reportLayer);
 
+  map.on('click', function(event) {
+
+    map.forEachFeatureAtPixel(event.pixel, function(feature,layer) {
+        console.log(feature);
+        console.log(feature.get('location_string'));
+        console.log(feature.get('value'));
+        console.log(feature.get('unit'));
+        $('#sidepanel-reports').empty();
+        // noinspection JSAnnotator
+        //$('#sidepanel-reports').append(`<h1>TEST</h1>`);
+        $('#sidepanel-reports').append(`<div id="reportList"><h3>${feature.get('location_string')}</h3><p>Value: ${feature.get('value')}</p><p>Unit: ${feature.get('unit')}</p></div>`);
+    })
+  });
 
 
 });
