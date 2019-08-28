@@ -13,6 +13,6 @@ import java.util.List;
 public interface ReportRepository extends JpaRepository<Report, Integer> {
     List<Report> findByDateString(String dateString);
 
-    @Query("SELECT DISTINCT dateString FROM Report")
+    @Query("SELECT DISTINCT dateString FROM Report ORDER BY dateString ASC")
     List<String> allDatesDistinct();
 }

@@ -41,7 +41,7 @@ public class ReportRestController {
             //return new ResponseEntity(reportRepository.findAll(), HttpStatus.OK);
             return new ResponseEntity(new ArrayList(), HttpStatus.OK);
         }
-        List<Report> reports = reportRepository.findByDateString(dateString.get() + " 00:00:00");
+        List<Report> reports = reportRepository.findByDateString(dateString.get());
         FeatureCollection featureCollection = new FeatureCollection();
         for(Report report : reports) {
             HashMap<String, Object> properties = new HashMap<>();
