@@ -36,9 +36,9 @@ public class ReportController {
             properties.put("time_period_type", report.getTimePeriodType());
             properties.put("value", report.getValue());
             properties.put("unit", report.getUnit());
-            if(report.getLocation() != null) {
+            /*if(report.getLocation() != null) {
                 featureCollection.addFeature(new Feature(report.getLocation(), properties));
-            }
+            }*/
         }
         return featureCollection;
     }

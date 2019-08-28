@@ -10,6 +10,10 @@ import javax.persistence.Id;
 @Entity
 public class Report {
 
+    /*
+    * report_date,location,location_type,data_field,data_field_code,time_period,time_period_type,value,unit
+    * */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,10 +25,10 @@ public class Report {
     private String dataFieldCode;
     private String timePeriod;
     private String timePeriodType;
-    private Integer value;
+    private Double value;
     private String unit;
 
-    private Geometry location;
+    //private Geometry location;
 
     // required Hibernate constructor
     public Report() {}
@@ -37,7 +41,7 @@ public class Report {
             String dataFieldCode,
             String timePeriod,
             String timePeriodType,
-            Integer value,
+            Double value,
             String unit
     ) {
         this.dateString=dateString;
@@ -99,11 +103,11 @@ public class Report {
         this.timePeriodType = timePeriodType;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
@@ -115,13 +119,13 @@ public class Report {
         this.unit = unit;
     }
 
-    public Geometry getLocation() {
-        return location;
-    }
-
-    public void setLocation(Geometry location) {
-        this.location = location;
-    }
+//    public Geometry getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(Geometry location) {
+//        this.location = location;
+//    }
 
 
     public String getDateString() {

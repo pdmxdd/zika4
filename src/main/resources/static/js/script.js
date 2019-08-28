@@ -28,16 +28,27 @@ $(document).ready(() => {
               stroke: new ol.style.Stroke({color: 'red', width: 1})
           })
       });
-  const reportSource = new ol.source.Vector({
-      format: new ol.format.GeoJSON(),
-      url: 'http://localhost:8080/report'
-  });
+
+  function generateSource(dateString) {
+      return new ol.source.Vector({
+          format: new ol.format.GeoJSON(),
+          url: '/api/report?date=' + dateString
+      })
+  }
+
   const reportLayer = new ol.layer.Vector({
-      source: reportSource,
-      style: function(feature) {
-          return pointStyle;
-      }
-  });
+    source: generateSource('2016-08-20'),
+    style: new ol.style.Style({
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.6)',
+        }),
+        stroke: new ol.style.Stroke({
+            color: '#319FD3',
+            width: 1
+        })
+    }),
+
+  })
   map.addLayer(reportLayer);
 
   map.on('click', function(event) {
@@ -52,6 +63,25 @@ $(document).ready(() => {
         //$('#sidepanel-reports').append(`<h1>TEST</h1>`);
         $('#sidepanel-reports').append(`<div id="reportList"><h3>${feature.get('location_string')}</h3><p>Value: ${feature.get('value')}</p><p>Unit: ${feature.get('unit')}</p></div>`);
     })
+  });
+
+
+
+  $('#date-select').empty()
+  fetch('/api/report/dates/unique')
+    .then(data => {
+        data.json().then(json => {
+            //console.log(json);
+            for(let i = 0; i < json.length; i++) {
+                //console.log(json[i]);
+                $('#date-select').append('<option value=' + json[i] + '>' + json[i] + '</option>');
+            }
+        })
+    })
+  $('#date-select').change(data => {
+    console.log('changed');
+    console.log($('#date-select').val());
+    reportLayer.setSource(generateSource($('#date-select').val()));
   });
 
 
